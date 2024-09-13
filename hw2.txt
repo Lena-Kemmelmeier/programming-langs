@@ -1,0 +1,225 @@
+; Author: Lena Kemmelmeier
+; Date: Feb 19 2024
+; Name: CS 326 HW2
+
+#lang racket ; because I am using the DrRacket environment
+
+
+; Q1 - returns a list identical to L except that every occurrence of x has been replaced with y.
+(define (subst x y L) ; x is the member to replace, y is the replacer, L is the list
+  (cond
+    ((null? L) L) ; base case -- if this list is empty, return an empty list
+    ((equal? (car L) x) (cons y (subst x y (cdr L)))) ; if the head of the list is the member we should replace set the new head of the list to be the new member, make a recursive call on the tail
+    (else (cons (car L) (subst x y (cdr L)))))) ; if the head of the list is not the member we should replace, the head should remain the same, make a recursive call on the list
+
+(displayln (subst 'c 'k '(c o c o n u t)))
+
+
+
+; Q2 - determines whether all elements of list L are distinct (that is, not equal?).
+(define (all-different? L)
+  
+  ; locally define a recursive function called member that checks if a is a member of lst
+  ; this is the exact same as the one we created in lecture :)
+  (letrec ((member (lambda (a lst)
+              (cond
+                ((null? lst) #f)
+                ((equal? a (car lst)) #t)
+                (else (member a (cdr lst)))))))
+
+  ; outer implementation here...
+  (cond
+    ((null? L) #t) ; if we reach the end of the list, then we know there were no indistinct members! also, if we return #f, then the result will always be #f...
+    ((member (car L) (cdr L)) #f) ; if the head is a member of the tail, return #f
+    (else (all-different? (cdr L)))))) ; if the head of this list is not a member, make a recursive call on the tail
+
+(displayln (all-different? '(3 7 2 7)))
+
+
+
+
+; Q3: Consider an implementation of binary trees with Scheme lists, as in the following example
+
+(define T
+  '(13
+     (5
+         (1 () ())
+         (8 ()
+             (9 () ())
+         )
+     )
+     (22
+         (17 () ())
+         (25 () ())
+     )
+  )
+)
+
+(displayln T)
+
+
+
+
+; Auxillary functions
+; returns the left-subtree of tree T
+(define (left T)
+  (if (null? T) ; check if T is null (otherwise I got a contract error w/ next part)
+      '()
+      (car (cdr T))))
+
+(displayln (left T))
+
+
+; returns the right subtree of tree T
+(define (right T)
+  (if (null? T)  ; check if T is null (otherwise I got a contract error w/ next part)
+      '()
+      (car (cdr (cdr T)))))
+
+(displayln (right T))
+
+; returns the value in the root of tree T
+(define (val T)
+  (car T))
+
+(displayln (val T))
+
+
+
+; Q3a: Write a recursive function (n-nodes T), which returns the number of nodes in the tree T
+(define (n-nodes T)
+  (cond
+    ((null? T) 0) ; if there is nothing in this tree, then return 0
+    (else (+ 1 (n-nodes (right T)) (n-nodes (left T)))))) ; traverse the left and right subtrees
+; remove the cond here
+
+(displayln (n-nodes T))
+
+; Q3b: Write a recursive function (n-leaves T), which returns the number of leaves in the tree T
+(define (n-leaves T)
+  (cond
+    ((null? T) 0) ; if there is nothing in this tree, then return 0
+    ((and (null? (right T)) (null? (left T))) 1) ; if this node doesn't have children, then it is a leaf, return 1
+    (else (+ (n-leaves (right T)) (n-leaves (left T)))))) ; add the number of nodes from left and right subtrees
+
+(displayln (n-leaves T))
+
+; Q3c: The height of a tree is defined as the maximum number of nodes on a path from
+; the root to a leaf. Write a recursive function (height T), which returns the height of the tree T.
+(define (height T)
+  (cond
+    ((null? T) 0); if there is nothing in this tree, then return 0
+    (else (+ 1 (max (height (right T)) (height (left T))))))) ; add 1 if is not null to what we have for height (always the max of the left and right subtree)
+
+(displayln (height T))
+
+; Q3d: Write a recursive function (postorder T), which returns the list of all
+; elements in the tree T corresponding to a postorder traversal of the tree
+(define (postorder T)
+  (if (not(null? T)) ; if this tree is not null
+      (append (postorder (left T)) (postorder (right T)) (list (val T))) ; do the traversal across both sub trees! 'visit' node after
+      '())) ; return this if empty
+
+(displayln (postorder T))
+
+; Q4: Write a recursive Scheme function (flatten L), which takes as arguments a list
+; L (possibly containing sublists), and returns a list containing all elements in L and its
+; sublists, but all at the same level
+
+(define test_list (list '(1 (2 (3 4)) 5)))
+
+(define (flatten L)
+  (cond
+    ((null? L) '())
+    ((list? L) (append (flatten (car L)) (flatten (cdr L)))) ; if this item is a list, call recursive call on head and tail (append results)
+    (else (list L)))) ; if this item is not a list, make it a list! (append combines lists)
+
+; (else (cons (car L) (flatten (cdr L)))) ; alternative to what is above - cons builds a list with the first element and then the rest
+
+(displayln (flatten test_list))
+
+
+; Q5: write a recursive function (member-bst? V T), which determines whether V appears as an element in the binary search tree T.
+(define (member-bst? V T)
+  (cond
+    ((null? T) #f) ; if we have reached the end of the tree and we haven't found it, return #f
+    ((= V (val T)) #t) ; if this tree's root value matches V, return #t
+    ((< V (val T)) (member-bst? V (left T))) ; if V is < root value, look left (no need to check = because of previous condition)
+    (else (member-bst? V (right T))))) ; if V is > than root value, look right
+
+(displayln (member-bst? 17 T))
+
+
+; Define factorial tail-recursive function in Scheme
+ (define fact (lambda (n)
+       (letrec ((fact_helper
+                (lambda (n s)
+                  (if (= n 0) s (fact_helper (- n 1) (* s n))))))
+         (fact_helper n 1))))
+
+(displayln (fact 3))
+
+ (define (fact2 n)
+       (letrec ((fact_helper (lambda (n s)
+                 (if (= n 0) s (fact_helper (- n 1) (* s n))))))
+         (fact_helper n 1)))
+
+(displayln (fact2 3))
+
+; n is the number to calculate the factorial for
+; s is accumulated value
+
+
+
+(define (fact4 n)
+  (letrec ((fact_helper (lambda (n s)
+                          (if (= n 0)
+                              s
+                              (fact_helper (- n 1) (* s n)))))) ; multiplication moved here
+    (fact_helper n 1))) 
+
+(displayln (fact4 3))
+
+
+
+
+(define (f V L)
+  (cond
+    ((null? L) '())
+    ((equal? V (car L)) (cdr L))
+    (else (cons (car L) (f V (cdr L))))))
+
+displayln(f 'a '())
+displayln(f 'a '(c d c a f a))
+displayln(f '3 '(5 (3 4) 3 7 3))
+
+(define (tally V L)
+  (cond ((null? L) 0)                       ; Base case: empty list
+        ((equal? (car L) V)                 ; Check if current element equals V
+         (+ 1 (tally V (cdr L))))          ; If equal, increment count and recurse on rest of the list
+        (else (tally V (cdr L)))))          ; Otherwise, recurse on the rest of the list
+
+;; Example usage:
+(display (tally 'V '(V a b c V d e V)))    ; Output: 3
+
+
+
+(define (member x lst)
+  (cond ((null? lst) #f)           ; Base case: Empty list
+        ((equal? (car lst) x) #t)  ; If x is found at the beginning of the list, return true
+        (else (member x (cdr lst))))) ; Recursively search for x in the rest of the list
+
+(define (add-to-set x set)
+  (if (member x set)
+      set                   ; If x is already in the set, return the set as it is
+      (cons x set)))         ; Otherwise, add x to the set
+
+(define (make-set L)
+  (define (make-set-helper lst result)
+    (cond ((null? lst) result)                ; Base case: Empty list
+          (else (make-set-helper (cdr lst)    ; Recur with the rest of the list
+                                  (add-to-set (car lst) result))))) ; Add current element to the set
+  (make-set-helper L '()))  ; Start with an empty set
+
+;; Example usage:
+(display (make-set '(1 2 3 1 2 4)))  ; Output: (4 3 2 1), order might vary
