@@ -1,7 +1,7 @@
 # Programming Languages, Concepts and Implementation: Projects/Assignments
 
-* Conceptual exercises: lkemmelmeier_cs326_hw1, lkemmelmeier_cs326_hw3, lkemmelmeier_cs326_hw4, lkemmelmeier_cs326_hw5, lkemmelmeier_cs326_hw6
-
+Conceptual exercises: lkemmelmeier_cs326_hw1, lkemmelmeier_cs326_hw3, lkemmelmeier_cs326_hw4, lkemmelmeier_cs326_hw5, lkemmelmeier_cs326_hw6
+##
  
 
 * hw2.txt (Scheme implementations)
