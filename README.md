@@ -1,5 +1,9 @@
 # Programming Languages, Concepts and Implementation: Projects/Assignments
 
+* Conceptual exercises: lkemmelmeier_cs326_hw1, lkemmelmeier_cs326_hw3, lkemmelmeier_cs326_hw4, lkemmelmeier_cs326_hw5, lkemmelmeier_cs326_hw6
+
+ 
+
 * hw2.txt (Scheme implementations)
 
   *  Question 1: Function (subst x y L), which returns a list identical to L except that every occurrence of x has been replaced with y.
@@ -20,6 +24,8 @@ the tree T
   * Question 4: Recursive Scheme function (flatten L), which takes as arguments a list L (possibly containing sublists), and returns a list containing all elements in L and its sublists, but all at the same level
  
   * Question 5: Recursive function (member-bst? V T), which determines whether V appears as an element in the binary search tree T
+ 
+   
 
 * hw7.pl (Prolog implementations)
 
