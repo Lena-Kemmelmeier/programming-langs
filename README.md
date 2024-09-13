@@ -1,2 +1,1 @@
-# programming_langs
-Programming Languages, Concepts and Implementation
+# Programming Languages, Concepts and Implementation: Projects/Assignments
