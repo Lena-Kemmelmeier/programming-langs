@@ -1,14 +1,34 @@
 # Programming Languages, Concepts and Implementation: Projects/Assignments
 
+* hw2.txt (Scheme implementations)
+
+  *  Question 1: Function (subst x y L), which returns a list identical to L except that every occurrence of x has been replaced with y.
+    
+  *  Question 2: Function (all-different? L), which determines whether all elements of list L are distinct (that is, not equal?).
+ 
+  *  Question 3: Binary tree with lists: three auxiliary functions (left T), (right T) and (val T) which return the left subtree, the right subtree, and the value in the root of tree T, respectively
+ 
+     * 3A) Recursive function (n-nodes T), which returns the number of nodes in the tree T
+ 
+     * 3B) Recursive function (n-leaves T), which returns the number of leaves in the tree T
+ 
+     * 3C) Recursive function (height T), which returns the height of
+the tree T
+
+     * 3D) Recursive function (postorder T), which returns the list of all elements in the tree T corresponding to a postorder traversal of the tree
+
+  * Question 4: Recursive Scheme function (flatten L), which takes as arguments a list L (possibly containing sublists), and returns a list containing all elements in L and its sublists, but all at the same level
+ 
+  * Question 5: Recursive function (member-bst? V T), which determines whether V appears as an element in the binary search tree T
+
 * hw7.pl (Prolog implementations)
 
-  * Question 1: Consider an implementation of sets with Prolog lists. A set is an unordered collection of
-  elements, without duplicates.
+  * Question 1:
 
-    1A) Predicate isSet(S), which succeeds if the list S is a set.
-    1B) Predicate isSubset(A,S), which succeeds if the set A is a subset of the set S.
-    1C) Predicate unionSets(A,B,C), which succeeds if the union of sets A and B is the set C.
-    1D) Predicate intersectionSets(A,B,C), which succeeds if the intersection of sets A and B is the set C.
+    * 1A) Predicate isSet(S), which succeeds if the list S is a set.
+    * 1B) Predicate isSubset(A,S), which succeeds if the set A is a subset of the set S.
+    * 1C) Predicate unionSets(A,B,C), which succeeds if the union of sets A and B is the set C.
+    * 1D) Predicate intersectionSets(A,B,C), which succeeds if the intersection of sets A and B is the set C.
   
   * Question 2: Predicate tally(E,L,N), which succeeds if N is the number of occurrences of element E in list L
 
