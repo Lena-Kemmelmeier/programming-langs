@@ -1,5 +1,12 @@
 # Programming Languages, Concepts and Implementation: Projects/Assignments
 
+Course Objectives: An overview of programming languages; features, structures, and implementation;
+examples taken from various programming paradigms. Introduction to formal specifications of languages. 
+
+The course examines the fundamental principles at work in the most important programming languages, highlights the critical relationship between language design and language implementation, and devotes special attention to issues of importance to the expert programmer. The focus of the course will always be on the concepts of programming languages, while the specific languages discussed are only present to support these concepts. Students should emerge better prepared to choose the best language for particular projects, to understand and make more effective use of languages they already know, and to learn new languages quickly and completely.
+
+Assignments + Descriptions:
+
 Conceptual exercises: lkemmelmeier_cs326_hw1, lkemmelmeier_cs326_hw3, lkemmelmeier_cs326_hw4, lkemmelmeier_cs326_hw5, lkemmelmeier_cs326_hw6
 ##
  
